@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MoviesViewController.h
 //  Rotten Tomatoes
 //
 //  Created by Sarat Tallamraju on 2/5/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MoviesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end
-
