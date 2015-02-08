@@ -11,6 +11,7 @@
 #import "SVProgressHUD.h"
 
 @interface MovieDetailViewController ()
+@property (strong, nonatomic) UILabel *titleLabel;
 
 @end
 
@@ -45,27 +46,35 @@
                                                   [SVProgressHUD dismiss];
                                               }];
     
+    
     // Get useful dimensions
-    NSInteger y = 20;
+    NSInteger y = 60;
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenFrame.size.width;
     NSInteger labelWidth = screenWidth - 40;
     CGRect frame = CGRectMake(20, y, labelWidth, 10);
     
+    self.titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, y - 60, screenWidth, 60)];
+    self.titleLabel.text = self.movieData[@"title"];
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 35.0f];
+    self.titleLabel.numberOfLines = 1;
+    
     // Set label
     self.movieSynopsisLabel = [[UILabel alloc] initWithFrame:frame];
     self.movieSynopsisLabel.text = self.movieData[@"synopsis"];
-    self.movieSynopsisLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size: 17.0f];
-    self.movieSynopsisLabel.textColor = [UIColor whiteColor];
+    self.movieSynopsisLabel.font = [UIFont fontWithName:@"HelveticaNeue" size: 17.0f];
+    CGFloat synopsisColor = 0.80;
+    self.movieSynopsisLabel.textColor = [UIColor colorWithRed:synopsisColor green:synopsisColor blue:synopsisColor alpha:1.0];
     self.movieSynopsisLabel.numberOfLines = 0;
-    self.movieSynopsisLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    self.movieSynopsisLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [self.movieSynopsisLabel sizeToFit];
     frame.size.height = self.movieSynopsisLabel.frame.size.height;
     self.movieSynopsisLabel.frame = CGRectMake(20, y, labelWidth, self.movieSynopsisLabel.frame.size.height);
 
     
     // Set gradient background view for the label
-    CGRect viewFrame = CGRectMake(0, y - 100, screenWidth, frame.size.height + 500);
+    CGRect viewFrame = CGRectMake(0, y - 150, screenWidth, frame.size.height + 500);
     UIView *view = [[UIView alloc] initWithFrame: viewFrame];
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = view.bounds;
@@ -79,8 +88,9 @@
     
     // Configure scroll view
     [self.scrollView addSubview: view];
+    [self.scrollView addSubview: self.titleLabel];
     [self.scrollView addSubview: self.movieSynopsisLabel];
-    CGSize contentSize = CGSizeMake(screenWidth, self.movieSynopsisLabel.frame.size.height);
+    CGSize contentSize = CGSizeMake(screenWidth, self.movieSynopsisLabel.frame.size.height + 60);
     self.scrollView.contentSize = contentSize;
     self.scrollView.contentInset=UIEdgeInsetsMake(450,0.0,50.0,0.0);
     [self.scrollView setContentOffset: CGPointMake(0, -self.scrollView.contentInset.top) animated:YES];

@@ -35,7 +35,7 @@
     self.apiKey = @"pbxv42978s4rh7tacnzwx669";
     self.cellName = @"MovieTableViewCell";
     
-    [self.navigationItem setTitle:@"Movies"];
+    [self.navigationItem setTitle:@"Box Office"];
     [self requestMoviesList];
     
     // Wire up the table to this class.
@@ -78,6 +78,7 @@
     
     // Set cell view.
     mtvc.movieTitleLabel.text = movieTitle;
+    mtvc.movieTitleLabel.textColor = [UIColor whiteColor];
     mtvc.movieSynopsisLabel.text = movieSynopsis;
     [mtvc.movieThumbnailImageView setImageWithURL:url];
     

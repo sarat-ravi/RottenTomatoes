@@ -21,10 +21,36 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     
+    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent];
+    
     MoviesViewController *moviesVC = [[MoviesViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:moviesVC];
     navigationController.navigationBar.translucent = NO;
     self.window.rootViewController = navigationController;
+    
+    CGFloat textColor = 0.90;
+    CGFloat separatorColor = 0.30;
+    CGFloat backgroundColor = 0.20;
+    CGFloat barTintColor = 0.15;
+    CGFloat tintColor = 0.99;
+    CGFloat navTitleColor = 0.99;
+    
+    navigationController.navigationBar.barTintColor = [UIColor colorWithRed:barTintColor green:barTintColor blue:barTintColor alpha:1.0];
+    navigationController.navigationBar.tintColor = [UIColor colorWithRed:tintColor green:tintColor blue:tintColor alpha:1.0];
+    
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor colorWithRed:navTitleColor green:navTitleColor blue:navTitleColor alpha:1.0], NSForegroundColorAttributeName, nil];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+    
+    // [[UINavigationBar appearance] setBackgroundColor: [UIColor colorWithRed:barTintColor green:barTintColor blue:barTintColor alpha:1.0]];
+    [[UITableView appearance] setSeparatorColor: [UIColor colorWithRed:separatorColor green:separatorColor blue:separatorColor alpha:0.0]];
+    [[UILabel appearance] setTextColor: [UIColor colorWithRed:textColor green:textColor blue:textColor alpha:1.0]];
+    [[UIView appearanceWhenContainedIn:[MoviesViewController class], nil] setBackgroundColor: [UIColor colorWithRed:backgroundColor
+                                                                                                              green:backgroundColor
+                                                                                                               blue:backgroundColor
+                                                                                                              alpha:1.0]];
+    // [[UIView appearance] setBackgroundColor: [UIColor blackColor]];
  
     return YES;
 }
