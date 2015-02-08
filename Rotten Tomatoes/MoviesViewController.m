@@ -11,6 +11,7 @@
 #import "MovieTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "MovieDetailViewController.h"
+#import "SVProgressHUD.h"
 
 @interface MoviesViewController ()
 
@@ -47,6 +48,9 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
     [self.moviesTableView addSubview:self.refreshControl];
+    // [self.refreshControl beginRefreshing];
+    
+    [SVProgressHUD show];
 }
 
 - (void)onRefresh {
@@ -113,6 +117,7 @@
                  NSLog(@"Connection error, failed to request: %@", urlString);
                  self.networkErrorLabel.hidden = NO;
                  [self.refreshControl endRefreshing];
+                 [SVProgressHUD dismiss];
              } else {
                  
                  // The Response.
@@ -123,6 +128,7 @@
                  [self.moviesTableView reloadData];
                  [self.refreshControl endRefreshing];
                  self.networkErrorLabel.hidden = YES;
+                 [SVProgressHUD dismiss];
              }
     }];
 }

@@ -8,6 +8,7 @@
 
 #import "MovieDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "SVProgressHUD.h"
 
 @interface MovieDetailViewController ()
 
@@ -27,7 +28,22 @@
     NSString *posterUrlString = self.movieData[@"posters"][@"detailed"];
     posterUrlString = [posterUrlString stringByReplacingOccurrencesOfString: @"tmb" withString:@"ori"];
     NSURL *posterUrl = [NSURL URLWithString: posterUrlString];
-    [self.moviePosterImageView setImageWithURL: posterUrl];
+    
+    [SVProgressHUD show];
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:posterUrl];
+    // [self.moviePosterImageView setImageWithURL: posterUrl];
+    
+    [self.moviePosterImageView setImageWithURLRequest:request
+                                     placeholderImage:nil
+                                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                  NSLog(@"Success");
+                                                  self.moviePosterImageView.image = image;
+                                                  [SVProgressHUD dismiss];
+                                              } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                  NSLog(@"Failure");
+                                                  [SVProgressHUD dismiss];
+                                              }];
     
     // Get useful dimensions
     NSInteger y = 20;
