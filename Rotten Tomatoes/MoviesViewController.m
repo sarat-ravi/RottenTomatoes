@@ -19,6 +19,7 @@
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *boxOfficeMovies;
 @property (strong, nonatomic) IBOutlet UITableView *moviesTableView;
+@property (strong, nonatomic) IBOutlet UILabel *networkErrorLabel;
 
 @end
 
@@ -88,6 +89,11 @@
     
     [self.moviesTableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (!self.networkErrorLabel.hidden) {
+        NSLog(@"network is down, can't segue");
+        return;
+    }
+    
     MovieDetailViewController *mdvc = [[MovieDetailViewController alloc] init];
     mdvc.movieData = self.boxOfficeMovies[indexPath.row];
     
@@ -105,6 +111,8 @@
              if (connectionError) {
                  // Handle connection error.
                  NSLog(@"Connection error, failed to request: %@", urlString);
+                 self.networkErrorLabel.hidden = NO;
+                 [self.refreshControl endRefreshing];
              } else {
                  
                  // The Response.
@@ -114,6 +122,7 @@
                  self.boxOfficeMovies = jsonResponse[@"movies"];
                  [self.moviesTableView reloadData];
                  [self.refreshControl endRefreshing];
+                 self.networkErrorLabel.hidden = YES;
              }
     }];
 }

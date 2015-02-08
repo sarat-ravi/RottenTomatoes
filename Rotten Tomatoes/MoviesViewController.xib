@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviesViewController">
             <connections>
                 <outlet property="moviesTableView" destination="5ME-gy-0N9" id="MfG-7Y-9rL"/>
+                <outlet property="networkErrorLabel" destination="QkH-3L-HTz" id="rg8-a7-3hX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,12 +20,25 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkH-3L-HTz">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="28"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.05780382098195247" alpha="0.70999999999999996" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="DS6-fI-v05"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="5ME-gy-0N9" secondAttribute="bottom" id="5oz-Qp-cBi"/>
+                <constraint firstItem="QkH-3L-HTz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IlR-Ab-BJX"/>
                 <constraint firstItem="5ME-gy-0N9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RfK-oH-LhK"/>
                 <constraint firstItem="5ME-gy-0N9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="l64-eM-IGF"/>
+                <constraint firstAttribute="trailing" secondItem="QkH-3L-HTz" secondAttribute="trailing" id="p3R-8s-Jha"/>
+                <constraint firstItem="QkH-3L-HTz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="v1L-Lu-Gyh"/>
                 <constraint firstAttribute="trailing" secondItem="5ME-gy-0N9" secondAttribute="trailing" id="x9R-cC-OlO"/>
             </constraints>
             <point key="canvasLocation" x="1144" y="674"/>
