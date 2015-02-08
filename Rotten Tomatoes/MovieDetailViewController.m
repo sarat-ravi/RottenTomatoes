@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor blackColor];
+    
     // Set title
     NSString *movieTitle = self.movieData[@"title"];
     [self.navigationItem setTitle: movieTitle];
@@ -27,22 +29,26 @@
     NSURL *posterUrl = [NSURL URLWithString: posterUrlString];
     [self.moviePosterImageView setImageWithURL: posterUrl];
     
-    // Set synopsis
+    // Get useful dimensions
     NSInteger y = 20;
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenFrame.size.width;
-    
     NSInteger labelWidth = screenWidth - 40;
     CGRect frame = CGRectMake(20, y, labelWidth, 10);
     
+    // Set label
     self.movieSynopsisLabel = [[UILabel alloc] initWithFrame:frame];
     self.movieSynopsisLabel.text = self.movieData[@"synopsis"];
+    self.movieSynopsisLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size: 17.0f];
+    self.movieSynopsisLabel.textColor = [UIColor whiteColor];
     self.movieSynopsisLabel.numberOfLines = 0;
     self.movieSynopsisLabel.lineBreakMode = NSLineBreakByCharWrapping;
     [self.movieSynopsisLabel sizeToFit];
     frame.size.height = self.movieSynopsisLabel.frame.size.height;
     self.movieSynopsisLabel.frame = CGRectMake(20, y, labelWidth, self.movieSynopsisLabel.frame.size.height);
+
     
+    // Set gradient background view for the label
     CGRect viewFrame = CGRectMake(0, y - 100, screenWidth, frame.size.height + 500);
     UIView *view = [[UIView alloc] initWithFrame: viewFrame];
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -55,19 +61,13 @@
     [view.layer insertSublayer:gradient atIndex:0];
     
     
-    
-    
+    // Configure scroll view
     [self.scrollView addSubview: view];
     [self.scrollView addSubview: self.movieSynopsisLabel];
     CGSize contentSize = CGSizeMake(screenWidth, self.movieSynopsisLabel.frame.size.height);
-    
     self.scrollView.contentSize = contentSize;
-    self.scrollView.contentInset=UIEdgeInsetsMake(400,0.0,50.0,0.0);
-    
-    
+    self.scrollView.contentInset=UIEdgeInsetsMake(450,0.0,50.0,0.0);
     [self.scrollView setContentOffset: CGPointMake(0, -self.scrollView.contentInset.top) animated:YES];
-    // CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-    // [self.scrollView setContentOffset:bottomOffset animated:YES];
 }
 
 - (void)oldViewDidLoad {

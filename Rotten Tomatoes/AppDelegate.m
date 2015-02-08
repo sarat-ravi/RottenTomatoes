@@ -23,6 +23,7 @@
     
     MoviesViewController *moviesVC = [[MoviesViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:moviesVC];
+    navigationController.navigationBar.translucent = NO;
     self.window.rootViewController = navigationController;
  
     return YES;

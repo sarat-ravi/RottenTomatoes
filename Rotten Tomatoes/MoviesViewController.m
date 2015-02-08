@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSString *apiKey;
 @property (strong, nonatomic) NSString *cellName;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *boxOfficeMovies;
 @property (strong, nonatomic) IBOutlet UITableView *moviesTableView;
 
@@ -41,6 +42,15 @@
     self.moviesTableView.rowHeight = 115;
     UINib *movieCellNib = [UINib nibWithNibName:self.cellName bundle:nil];
     [self.moviesTableView registerNib:movieCellNib forCellReuseIdentifier:self.cellName];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.moviesTableView addSubview:self.refreshControl];
+}
+
+- (void)onRefresh {
+    NSLog(@"onRefresh");
+    [self requestMoviesList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,6 +113,7 @@
                  
                  self.boxOfficeMovies = jsonResponse[@"movies"];
                  [self.moviesTableView reloadData];
+                 [self.refreshControl endRefreshing];
              }
     }];
 }
