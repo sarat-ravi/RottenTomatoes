@@ -50,6 +50,8 @@
     [self.moviesTableView addSubview:self.refreshControl];
     // [self.refreshControl beginRefreshing];
     
+    self.networkErrorLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
+    
     [SVProgressHUD show];
 }
 
