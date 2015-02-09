@@ -15,7 +15,7 @@ Time spent: `12` hours
 - [X] User can pull to refresh the movie list.
 
 ##### Network Error Screen Shot
-![Network Error Screen Shot](rotten_tomatoes_screen_shot.png =250x)
+![Network Error Screen Shot](rotten_tomatoes_screen_shot.png)
 
 #### Optional
 
