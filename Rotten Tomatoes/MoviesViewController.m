@@ -21,6 +21,8 @@
 @property (strong, nonatomic) NSArray *boxOfficeMovies;
 @property (strong, nonatomic) IBOutlet UITableView *moviesTableView;
 @property (strong, nonatomic) IBOutlet UILabel *networkErrorLabel;
+@property (strong, nonatomic) IBOutlet UITabBar *tabBar;
+@property (nonatomic) NSInteger tabId;
 
 @end
 
@@ -31,12 +33,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tabId = 0;
+    
     // State
     self.apiKey = @"pbxv42978s4rh7tacnzwx669";
     self.cellName = @"MovieTableViewCell";
     
     [self.navigationItem setTitle:@"Box Office"];
-    [self requestMoviesList];
+    [self onRefresh];
     
     // Wire up the table to this class.
     self.moviesTableView.delegate = self;
@@ -52,12 +56,40 @@
     
     self.networkErrorLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
     
-    [SVProgressHUD show];
+    // self.tabBar.tintColor = [UIColor whiteColor];
+    
+    self.tabBar.delegate = self;
+    
+    // [SVProgressHUD show];
+}
+
+-(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    if (item.tag == 0) {
+        NSLog(@"Box Office tab selected");
+        if (self.tabId == 0) {
+            NSLog(@"Tab already selected, not doing anything");
+            return;
+        }
+        self.tabId = 0;
+        [self onRefresh];
+    } else {
+        NSLog(@"DVD tab selected");
+        if (self.tabId == 1) {
+            NSLog(@"Tab already selected, not doing anything");
+            return;
+        }
+        self.tabId = 1;
+        [self onRefresh];
+    }
 }
 
 - (void)onRefresh {
     NSLog(@"onRefresh");
-    [self requestMoviesList];
+    if (self.tabId == 0) {
+        [self requestMoviesList];
+    } else {
+        [self requestDVDList];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,7 +112,7 @@
     
     // Set cell view.
     mtvc.movieTitleLabel.text = movieTitle;
-    mtvc.movieTitleLabel.textColor = [UIColor whiteColor];
+    mtvc.movieTitleLabel.textColor = [UIColor blackColor];
     mtvc.movieSynopsisLabel.text = movieSynopsis;
     [mtvc.movieThumbnailImageView setImageWithURL:url];
     
@@ -109,9 +141,19 @@
 
 #pragma mark Requests
 
+- (void)requestDVDList {
+    [SVProgressHUD show];
+    NSString *urlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/current_releases.json?apikey=%@", self.apiKey];
+    [self requestMoviesWithURL:urlString];
+}
+
 - (void)requestMoviesList {
+    [SVProgressHUD show];
     NSString *urlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=%@", self.apiKey];
-    
+    [self requestMoviesWithURL:urlString];
+}
+
+- (void)requestMoviesWithURL: (NSString *) urlString {
     [SaratUtils makeRequestToUrl: urlString
          completionHandler: ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
              

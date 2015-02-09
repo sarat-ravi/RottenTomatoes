@@ -28,7 +28,7 @@
     navigationController.navigationBar.translucent = NO;
     self.window.rootViewController = navigationController;
     
-    CGFloat textColor = 0.90;
+    CGFloat textColor = 0.60;
     CGFloat separatorColor = 0.30;
     CGFloat backgroundColor = 0.20;
     CGFloat barTintColor = 0.15;
@@ -38,6 +38,8 @@
     navigationController.navigationBar.barTintColor = [UIColor colorWithRed:barTintColor green:barTintColor blue:barTintColor alpha:1.0];
     navigationController.navigationBar.tintColor = [UIColor colorWithRed:tintColor green:tintColor blue:tintColor alpha:1.0];
     
+    [[UITabBar appearance] setTintColor: [UIColor colorWithRed:tintColor green:tintColor blue:tintColor alpha:1.0]];
+    
     NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                                [UIColor colorWithRed:navTitleColor green:navTitleColor blue:navTitleColor alpha:1.0], NSForegroundColorAttributeName, nil];
     
@@ -46,10 +48,6 @@
     // [[UINavigationBar appearance] setBackgroundColor: [UIColor colorWithRed:barTintColor green:barTintColor blue:barTintColor alpha:1.0]];
     [[UITableView appearance] setSeparatorColor: [UIColor colorWithRed:separatorColor green:separatorColor blue:separatorColor alpha:0.0]];
     [[UILabel appearance] setTextColor: [UIColor colorWithRed:textColor green:textColor blue:textColor alpha:1.0]];
-    [[UIView appearanceWhenContainedIn:[MoviesViewController class], nil] setBackgroundColor: [UIColor colorWithRed:backgroundColor
-                                                                                                              green:backgroundColor
-                                                                                                               blue:backgroundColor
-                                                                                                              alpha:1.0]];
     // [[UIView appearance] setBackgroundColor: [UIColor blackColor]];
  
     return YES;

@@ -78,6 +78,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41BC84171A880D1300337F35 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				41BC84181A880D2500337F35 /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		41BC84181A880D2500337F35 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		41CB791A1A848E82004C06A5 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +116,7 @@
 		41CB79251A848E82004C06A5 /* Rotten Tomatoes */ = {
 			isa = PBXGroup;
 			children = (
+				41BC84171A880D1300337F35 /* Resources */,
 				41BC84121A85DD4B00337F35 /* MovieDetailViewController.h */,
 				41BC84131A85DD4B00337F35 /* MovieDetailViewController.m */,
 				41BC84141A85DD4B00337F35 /* MovieDetailViewController.xib */,

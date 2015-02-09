@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="moviesTableView" destination="5ME-gy-0N9" id="MfG-7Y-9rL"/>
                 <outlet property="networkErrorLabel" destination="QkH-3L-HTz" id="rg8-a7-3hX"/>
+                <outlet property="tabBar" destination="iGR-Io-dMr" id="8EW-jZ-qt8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5ME-gy-0N9">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkH-3L-HTz">
@@ -30,18 +31,39 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tabBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGR-Io-dMr">
+                    <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Ghe-cs-8VV"/>
+                    </constraints>
+                    <items>
+                        <tabBarItem title="Box Office" image="Clapperboard" id="MHU-iX-EXc"/>
+                        <tabBarItem tag="1" title="DVD" image="dvdIcon" id="Ape-uK-mCR"/>
+                    </items>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tabBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="5ME-gy-0N9" secondAttribute="bottom" id="5oz-Qp-cBi"/>
+                <constraint firstItem="iGR-Io-dMr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5bM-tD-c2v"/>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="trailing" secondItem="QkH-3L-HTz" secondAttribute="trailing" id="8mS-mM-NNV"/>
+                <constraint firstAttribute="bottom" secondItem="iGR-Io-dMr" secondAttribute="bottom" id="AGP-cd-Xga"/>
+                <constraint firstAttribute="trailing" secondItem="iGR-Io-dMr" secondAttribute="trailing" id="D8W-xC-Afv"/>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="leading" secondItem="QkH-3L-HTz" secondAttribute="leading" id="GbF-cC-zoN"/>
                 <constraint firstItem="QkH-3L-HTz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IlR-Ab-BJX"/>
-                <constraint firstItem="5ME-gy-0N9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RfK-oH-LhK"/>
-                <constraint firstItem="5ME-gy-0N9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="l64-eM-IGF"/>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="top" secondItem="QkH-3L-HTz" secondAttribute="top" id="TqJ-bc-WOn"/>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="bottom" secondItem="iGR-Io-dMr" secondAttribute="top" id="kfq-Il-7o5"/>
                 <constraint firstAttribute="trailing" secondItem="QkH-3L-HTz" secondAttribute="trailing" id="p3R-8s-Jha"/>
                 <constraint firstItem="QkH-3L-HTz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="v1L-Lu-Gyh"/>
-                <constraint firstAttribute="trailing" secondItem="5ME-gy-0N9" secondAttribute="trailing" id="x9R-cC-OlO"/>
             </constraints>
             <point key="canvasLocation" x="1144" y="674"/>
         </view>
     </objects>
+    <resources>
+        <image name="Clapperboard" width="25" height="25"/>
+        <image name="dvdIcon" width="25" height="25"/>
+    </resources>
 </document>
