@@ -55,10 +55,12 @@
     // [self.refreshControl beginRefreshing];
     
     self.networkErrorLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
+    self.networkErrorLabel.textColor = [UIColor whiteColor];
     
     // self.tabBar.tintColor = [UIColor whiteColor];
     
     self.tabBar.delegate = self;
+    self.tabBar.selectedItem = [self.tabBar.items objectAtIndex: self.tabId];
     
     // [SVProgressHUD show];
 }

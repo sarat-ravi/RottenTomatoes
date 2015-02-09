@@ -27,14 +27,19 @@
     
     // Set image
     NSString *posterUrlString = self.movieData[@"posters"][@"detailed"];
-    posterUrlString = [posterUrlString stringByReplacingOccurrencesOfString: @"tmb" withString:@"ori"];
     NSURL *posterUrl = [NSURL URLWithString: posterUrlString];
     
-    [SVProgressHUD show];
+    // [SVProgressHUD show];
     
+    [self.moviePosterImageView setImageWithURL: posterUrl];
+    
+    
+    posterUrlString = [posterUrlString stringByReplacingOccurrencesOfString: @"tmb" withString:@"ori"];
+    posterUrl = [NSURL URLWithString: posterUrlString];
+    [self.moviePosterImageView setImageWithURL: posterUrl];
+    
+    /*
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:posterUrl];
-    // [self.moviePosterImageView setImageWithURL: posterUrl];
-    
     [self.moviePosterImageView setImageWithURLRequest:request
                                      placeholderImage:nil
                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -45,6 +50,7 @@
                                                   NSLog(@"Failure");
                                                   [SVProgressHUD dismiss];
                                               }];
+     */
     
     
     // Get useful dimensions
