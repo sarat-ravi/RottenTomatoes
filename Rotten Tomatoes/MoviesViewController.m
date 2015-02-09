@@ -48,7 +48,7 @@
     self.boxOfficeUrlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=%@", self.apiKey];
     
     self.currentUrlString = self.boxOfficeUrlString;
-    self.dvdUrlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/current_releases.json?apikey=%@", self.apiKey];
+    self.dvdUrlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=%@", self.apiKey];
     
     [self.navigationItem setTitle:@"Box Office"];
     [self onRefresh];
