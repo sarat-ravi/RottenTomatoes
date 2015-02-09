@@ -219,6 +219,16 @@
                  // NSLog(@"JSON response: %@", jsonResponse);
                  
                  self.boxOfficeMovies = jsonResponse[@"movies"];
+                 
+                 NSMutableArray *temp = [[NSMutableArray alloc] initWithCapacity:0];
+                 for (int i = 0; i < self.boxOfficeMovies.count; i++) {
+                     NSDictionary *data = [self.boxOfficeMovies objectAtIndex:i];
+                     if ([data[@"synopsis"] length] > 0) {
+                         [temp addObject:data];
+                     }
+                 }
+                 self.boxOfficeMovies = temp;
+                 
                  [self.moviesTableView reloadData];
                  [self.refreshControl endRefreshing];
                  self.networkErrorLabel.hidden = YES;
