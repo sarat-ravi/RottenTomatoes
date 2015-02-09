@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="moviesTableView" destination="5ME-gy-0N9" id="MfG-7Y-9rL"/>
                 <outlet property="networkErrorLabel" destination="QkH-3L-HTz" id="rg8-a7-3hX"/>
+                <outlet property="searchBar" destination="kqC-kG-Jia" id="s8q-Cj-Sum"/>
                 <outlet property="tabBar" destination="iGR-Io-dMr" id="8EW-jZ-qt8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -18,19 +19,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5ME-gy-0N9">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
+                    <rect key="frame" x="0.0" y="44" width="600" height="506"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkH-3L-HTz">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="28"/>
-                    <color key="backgroundColor" red="1" green="0.0" blue="0.05780382098195247" alpha="0.70999999999999996" colorSpace="calibratedRGB"/>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="kqC-kG-Jia">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="28" id="DS6-fI-v05"/>
+                        <constraint firstAttribute="height" constant="44" id="ora-Qa-kda"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
                 <tabBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGR-Io-dMr">
                     <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,18 +43,31 @@
                     <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tabBar>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkH-3L-HTz">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="28"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.05780382098195247" alpha="0.70999999999999996" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="DS6-fI-v05"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="trailing" secondItem="kqC-kG-Jia" secondAttribute="trailing" id="274-pk-7e8"/>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="bottom" secondItem="iGR-Io-dMr" secondAttribute="top" id="5EC-4J-Yty"/>
                 <constraint firstItem="iGR-Io-dMr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5bM-tD-c2v"/>
-                <constraint firstItem="5ME-gy-0N9" firstAttribute="trailing" secondItem="QkH-3L-HTz" secondAttribute="trailing" id="8mS-mM-NNV"/>
                 <constraint firstAttribute="bottom" secondItem="iGR-Io-dMr" secondAttribute="bottom" id="AGP-cd-Xga"/>
+                <constraint firstItem="kqC-kG-Jia" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BCF-e8-OoN"/>
                 <constraint firstAttribute="trailing" secondItem="iGR-Io-dMr" secondAttribute="trailing" id="D8W-xC-Afv"/>
-                <constraint firstItem="5ME-gy-0N9" firstAttribute="leading" secondItem="QkH-3L-HTz" secondAttribute="leading" id="GbF-cC-zoN"/>
                 <constraint firstItem="QkH-3L-HTz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IlR-Ab-BJX"/>
-                <constraint firstItem="5ME-gy-0N9" firstAttribute="top" secondItem="QkH-3L-HTz" secondAttribute="top" id="TqJ-bc-WOn"/>
-                <constraint firstItem="5ME-gy-0N9" firstAttribute="bottom" secondItem="iGR-Io-dMr" secondAttribute="top" id="kfq-Il-7o5"/>
+                <constraint firstAttribute="trailing" secondItem="kqC-kG-Jia" secondAttribute="trailing" id="JYA-kw-aup"/>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="top" secondItem="kqC-kG-Jia" secondAttribute="bottom" id="YO7-ek-NGv"/>
+                <constraint firstItem="5ME-gy-0N9" firstAttribute="leading" secondItem="QkH-3L-HTz" secondAttribute="leading" id="YOD-3B-4tY"/>
                 <constraint firstAttribute="trailing" secondItem="QkH-3L-HTz" secondAttribute="trailing" id="p3R-8s-Jha"/>
+                <constraint firstItem="kqC-kG-Jia" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uft-zS-Q4J"/>
                 <constraint firstItem="QkH-3L-HTz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="v1L-Lu-Gyh"/>
             </constraints>
             <point key="canvasLocation" x="1144" y="674"/>

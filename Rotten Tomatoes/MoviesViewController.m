@@ -16,6 +16,11 @@
 @interface MoviesViewController ()
 
 @property (strong, nonatomic) NSString *apiKey;
+
+@property (strong, nonatomic) NSString *currentUrlString;
+@property (strong, nonatomic) NSString *boxOfficeUrlString;
+@property (strong, nonatomic) NSString *dvdUrlString;
+
 @property (strong, nonatomic) NSString *cellName;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *boxOfficeMovies;
@@ -23,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *networkErrorLabel;
 @property (strong, nonatomic) IBOutlet UITabBar *tabBar;
 @property (nonatomic) NSInteger tabId;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -38,6 +44,11 @@
     // State
     self.apiKey = @"pbxv42978s4rh7tacnzwx669";
     self.cellName = @"MovieTableViewCell";
+    
+    self.boxOfficeUrlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=%@", self.apiKey];
+    
+    self.currentUrlString = self.boxOfficeUrlString;
+    self.dvdUrlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/current_releases.json?apikey=%@", self.apiKey];
     
     [self.navigationItem setTitle:@"Box Office"];
     [self onRefresh];
@@ -62,7 +73,42 @@
     self.tabBar.delegate = self;
     self.tabBar.selectedItem = [self.tabBar.items objectAtIndex: self.tabId];
     
+    self.searchBar.delegate = self;
+    
     // [SVProgressHUD show];
+}
+
+-(void) executeSearch: (UISearchBar *)searchBar {
+    NSString *escaped = [searchBar.text stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLHostAllowedCharacterSet]];
+    self.currentUrlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=%@&page_limit=20&page=1&apikey=%@", escaped, self.apiKey];
+    self.tabId = 3;
+    [self onRefresh];
+    // [self cancelSearch:searchBar];
+}
+
+-(void) cancelSearch: (UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+-(void) searchBarDidEndEditing: (UISearchBar *)searchBar {
+    NSLog(@"search bar done editing");
+    [self executeSearch:searchBar];
+}
+
+-(void) searchBarSearchButtonClicked: (UISearchBar *)searchBar {
+    NSLog(@"search bar search button clicked");
+    [self executeSearch:searchBar];
+}
+
+-(void) searchBarCancelButtonClicked: (UISearchBar *)searchBar {
+    NSLog(@"search bar cancel button clicked");
+    [self cancelSearch:searchBar];
+}
+
+-(void)requestMoviesWithSearchString: (NSString *) searchString {
+    [SVProgressHUD show];
+    NSString *urlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=%@&page_limit=20&page=1&apikey=%@", searchString, self.apiKey];
+    [self requestMoviesWithURL:urlString];
 }
 
 -(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
@@ -73,6 +119,7 @@
             return;
         }
         self.tabId = 0;
+        self.currentUrlString = self.boxOfficeUrlString;
         [self onRefresh];
     } else {
         NSLog(@"DVD tab selected");
@@ -81,17 +128,19 @@
             return;
         }
         self.tabId = 1;
+        self.currentUrlString = self.dvdUrlString;
         [self onRefresh];
     }
 }
 
 - (void)onRefresh {
     NSLog(@"onRefresh");
-    if (self.tabId == 0) {
-        [self requestMoviesList];
-    } else {
-        [self requestDVDList];
+    [SVProgressHUD show];
+    if (self.tabId != 3) {
+        self.searchBar.text = @"";
     }
+    [self.searchBar resignFirstResponder];
+    [self requestMoviesWithURL: self.currentUrlString];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,14 +194,12 @@
 
 - (void)requestDVDList {
     [SVProgressHUD show];
-    NSString *urlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/current_releases.json?apikey=%@", self.apiKey];
-    [self requestMoviesWithURL:urlString];
+    [self requestMoviesWithURL:self.dvdUrlString];
 }
 
 - (void)requestMoviesList {
     [SVProgressHUD show];
-    NSString *urlString = [NSString stringWithFormat: @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=%@", self.apiKey];
-    [self requestMoviesWithURL:urlString];
+    [self requestMoviesWithURL:self.boxOfficeUrlString];
 }
 
 - (void)requestMoviesWithURL: (NSString *) urlString {

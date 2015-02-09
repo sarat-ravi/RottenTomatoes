@@ -9,6 +9,7 @@
 #import "MovieDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "MarqueeLabel.h"
 
 @interface MovieDetailViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -60,7 +61,8 @@
     NSInteger labelWidth = screenWidth - 40;
     CGRect frame = CGRectMake(20, y, labelWidth, 10);
     
-    self.titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, y - 60, screenWidth, 60)];
+    // self.titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, y - 60, screenWidth, 60)];
+    self.titleLabel = [[MarqueeLabel alloc] initWithFrame: CGRectMake(20, y - 60, screenWidth, 60) duration:3.0 andFadeLength:10.0f];
     self.titleLabel.text = self.movieData[@"title"];
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 35.0f];
